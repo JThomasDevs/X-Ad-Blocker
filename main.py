@@ -5,6 +5,15 @@ from DrissionPage.commons.by import By
 from DrissionPage.easy_set import set_headless
 
 
+def check_logged_in():
+    global page
+
+    if page.ele((By.XPATH, '//a[@data-testid="signupButton"]')):
+        print('Please sign in to Twitter and then re-run the script.')
+        return False
+    return True
+
+
 def block_poster(post: ChromiumElement):
     global blocked
     global page
@@ -62,6 +71,9 @@ def find_ads():
 set_headless(False)
 page = ChromiumPage()
 page.get('https://www.x.com')
+log_status = check_logged_in()   # Check if user is logged in
+if not log_status:
+    exit(0)
 print('waiting')
 time.sleep(3)
 blocked = 0
