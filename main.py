@@ -74,8 +74,6 @@ page.get('https://www.x.com')
 log_status = check_logged_in()   # Check if user is logged in
 if not log_status:
     exit(0)
-print('waiting')
-time.sleep(3)
 blocked = 0
 last_post = None
 #while blocked < amount:
