@@ -3,6 +3,7 @@ from DrissionPage import ChromiumPage
 from DrissionPage.chromium_element import ChromiumElement
 from DrissionPage.commons.by import By
 from DrissionPage.easy_set import set_headless
+from DrissionPage.errors import ElementLossError
 
 
 def check_logged_in():
@@ -59,7 +60,10 @@ def find_ads():
     last_post = posts[-1]
     for post in posts:
         ad = False
-        spans = post.eles('tag:span')
+        try:
+            spans = post.eles('tag:span')
+        except ElementLossError:
+            continue
         for span in spans:
             if span.inner_html == 'Ad':
                 ad = True
